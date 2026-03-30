@@ -10,8 +10,4 @@ wheels/
 .venv
 
 # Cursor
-.cursor/
-
-# Unofficial notes
-blueprints/
-dev-reports/
+# .cursor/
