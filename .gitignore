@@ -11,3 +11,6 @@ wheels/
 
 # Cursor
 # .cursor/
+
+# Environment variables
+.env
