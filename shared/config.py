@@ -24,9 +24,8 @@ class OrchestratorConfig(BaseModel):
 
 
 class VLMConfig(BaseModel):
-	base_url: str = "https://api.siliconflow.cn/v1"
+	base_url: str = "http://localhost:8000/v1"
 	model: str = "Qwen/Qwen2.5-VL-72B-Instruct"
-	api_key: str = ""
 
 
 class LLMConfig(BaseModel):
@@ -79,11 +78,7 @@ def load_config(
 	if config_path.exists():
 		raw = toml.load(config_path)
 
-	# 从环境变量注入 API key
-	vlm_section = raw.get("vlm", {})
-	vlm_section.setdefault("api_key", os.getenv("VLM_API_KEY", ""))
-	raw["vlm"] = vlm_section
-
+	# 从环境变量注入 LLM API key（VLM 本地无需认证）
 	llm_section = raw.get("llm", {})
 	llm_section.setdefault("api_key", os.getenv("LLM_API_KEY", ""))
 	raw["llm"] = llm_section

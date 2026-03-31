@@ -31,38 +31,15 @@ def create_llm_client(cfg: AppConfig) -> LLMClient:
 	)
 
 
-def _create_vlm_client(cfg: AppConfig):
-	"""创建 VLM 客户端。
+def create_vlm_client(cfg: AppConfig):
+	"""创建 VLM 客户端（来自 ahu_paimon_toolkit）。
 
-	toolkit 的 AsyncVLMClient 不支持 api_key，但 SiliconFlow 等云端
-	VLM 需要 Authorization header。这里通过继承注入 header。
+	本地 vLLM 服务无需认证，直接使用原生 AsyncVLMClient。
 	"""
 	from ahu_paimon_toolkit.vlm.client import AsyncVLMClient
-	import httpx
-
-	class AuthVLMClient(AsyncVLMClient):
-		"""带 Authorization header 的 VLM 客户端。"""
-
-		def __init__(self, *args, api_key: str = "", **kwargs):
-			super().__init__(*args, **kwargs)
-			self._api_key = api_key
-
-		async def _ensure_client(self) -> httpx.AsyncClient:
-			if self._client is None or self._client.is_closed:
-				headers = {}
-				if self._api_key:
-					headers["Authorization"] = f"Bearer {self._api_key}"
-				self._client = httpx.AsyncClient(
-					base_url=self._base_url,
-					timeout=httpx.Timeout(self._timeout),
-					headers=headers,
-				)
-			return self._client
-
-	return AuthVLMClient(
+	return AsyncVLMClient(
 		base_url=cfg.vlm.base_url,
 		model=cfg.vlm.model,
-		api_key=cfg.vlm.api_key,
 	)
 
 
@@ -75,9 +52,8 @@ async def run() -> None:
 	llm_client = create_llm_client(cfg)
 
 	# VLM 客户端（感知 + 验证）
-	from ahu_paimon_toolkit.vlm.client import AsyncVLMClient
-	vlm_client = _create_vlm_client(cfg)
-	logger.info(f"VLM 客户端已创建: {cfg.vlm.model}")
+	vlm_client = create_vlm_client(cfg)
+	logger.info(f"VLM 客户端已创建: {cfg.vlm.model} @ {cfg.vlm.base_url}")
 
 	# FastMCP server + plugin 注册
 	from fastmcp import FastMCP, Client
