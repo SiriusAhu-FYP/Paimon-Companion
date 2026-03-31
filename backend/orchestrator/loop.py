@@ -18,18 +18,18 @@ from ahu_paimon_toolkit.capture.window_capture import (
 from ahu_paimon_toolkit.vlm.client import AsyncVLMClient
 from ahu_paimon_toolkit.models import KeyFrame
 
-from shared.config import AppConfig
-from shared.input_control import focus_and_click
-from shared.llm_client import LLMClient
+from backend.shared.config import AppConfig
+from backend.shared.input_control import focus_and_click
+from backend.shared.llm_client import LLMClient
 
-from orchestrator.context import (
+from backend.orchestrator.context import (
 	DecisionHistory,
 	DecisionEntry,
 	ToolResult,
 	build_messages,
 	load_game_prompt,
 )
-from orchestrator.safety import verify_action
+from backend.orchestrator.safety import verify_action
 
 
 # 需要做操作后验证的工具集合

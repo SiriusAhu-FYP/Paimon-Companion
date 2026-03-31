@@ -12,7 +12,7 @@ def register_all_plugins(
 ) -> None:
 	"""根据游戏名注册对应的 game plugin。"""
 	if game == "2048":
-		from plugins.games.game_2048 import register
+		from backend.plugins.games.game_2048 import register
 		register(server, window_title=window_title, move_delay_ms=move_delay_ms)
 	else:
 		raise ValueError(f"未知游戏: {game}")

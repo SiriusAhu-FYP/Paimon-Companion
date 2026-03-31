@@ -14,3 +14,10 @@ wheels/
 
 # Environment variables
 .env
+
+# Local toolkit reference (do not track in git)
+ahu_paimon_toolkit/
+
+# Backend pycache
+backend/__pycache__/
+backend/**/__pycache__/

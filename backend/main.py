@@ -5,8 +5,8 @@ import sys
 
 from loguru import logger
 
-from shared.config import load_config, AppConfig
-from shared.llm_client import LLMClient
+from backend.shared.config import load_config, AppConfig
+from backend.shared.llm_client import LLMClient
 
 
 def setup_logging(cfg: AppConfig) -> None:
@@ -57,7 +57,7 @@ async def run() -> None:
 
 	# FastMCP server + plugin 注册
 	from fastmcp import FastMCP, Client
-	from plugins import register_all_plugins
+	from backend.plugins import register_all_plugins
 
 	server = FastMCP("paimon-companion")
 	register_all_plugins(
@@ -69,7 +69,7 @@ async def run() -> None:
 	logger.info("FastMCP server 已创建，插件已注册")
 
 	# Orchestrator 主循环
-	from orchestrator.loop import orchestrator_loop
+	from backend.orchestrator.loop import orchestrator_loop
 
 	async with Client(server) as mcp_client:
 		logger.info("MCP in-process 连接已建立，启动 Orchestrator")

@@ -2,6 +2,7 @@
 name = "paimon-companion"
 version = "0.1.0"
 description = "PAIMON - Player-Aware Intelligent Monitoring and Operations Navigator"
+readme = "README.md"
 requires-python = ">=3.12"
 dependencies = [
 	"ahu-paimon-toolkit[windows]",
@@ -15,8 +16,11 @@ dependencies = [
 	"pillow>=10.0",
 ]
 
+[tool.uv.sources]
+ahu-paimon-toolkit = { path = "../../Video-Understanding-MVP/ahu_paimon_toolkit", editable = true }
+
 [tool.hatch.build.targets.wheel]
-packages = ["backend.shared", "backend.orchestrator", "backend.plugins"]
+packages = ["shared", "orchestrator", "plugins"]
 
 [build-system]
 requires = ["hatchling"]

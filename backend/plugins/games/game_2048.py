@@ -5,7 +5,7 @@ import time
 from fastmcp import FastMCP
 from loguru import logger
 
-from shared.input_control import press_key, focus_and_click
+from backend.shared.input_control import press_key, focus_and_click
 
 
 # 允许的方向值
