@@ -1,0 +1,28 @@
+[game]
+name = "2048"
+window_title = "2048"
+
+[orchestrator]
+max_iterations = 30
+move_delay_ms = 150
+verify_after_action = true
+
+[vlm]
+base_url = "https://api.siliconflow.cn/v1"
+model = "Qwen/Qwen2.5-VL-72B-Instruct"
+# api_key 从 .env 读取: VLM_API_KEY
+
+[llm]
+base_url = "https://www.dmxapi.cn/v1/"
+model = "gpt-4o"
+temperature = 0.3
+# api_key 从 .env 读取: LLM_API_KEY
+
+[companion]
+character = "paimon"
+expression_enabled = false
+
+[logging]
+level = "INFO"
+directory = "logs"
+save_screenshots = true

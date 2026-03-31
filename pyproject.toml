@@ -1,7 +1,27 @@
 [project]
 name = "paimon-companion"
 version = "0.1.0"
-description = "Add your description here"
+description = "PAIMON - Player-Aware Intelligent Monitoring and Operations Navigator"
 readme = "README.md"
 requires-python = ">=3.12"
-dependencies = []
+dependencies = [
+	"ahu-paimon-toolkit[windows]",
+	"fastmcp>=2.0",
+	"openai>=1.0",
+	"pynput>=1.7",
+	"pydantic>=2.0",
+	"toml",
+	"python-dotenv",
+	"loguru",
+	"pillow>=10.0",
+]
+
+[tool.uv.sources]
+ahu-paimon-toolkit = { path = "../Video-Understanding-MVP/ahu_paimon_toolkit", editable = true }
+
+[tool.hatch.build.targets.wheel]
+packages = ["shared", "orchestrator", "plugins"]
+
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
