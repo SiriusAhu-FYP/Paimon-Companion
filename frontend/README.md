@@ -1,28 +1,17 @@
-# Frontend
+# VoiceL2D-MVP Frontend
 
-> VoiceL2D companion frontend (Live2D + TTS + ASR integration point).
-> This directory will host the companion-facing UI layer.
+所有文档已经集中在 `docs/` 目录：
 
-## Current Status
+- `docs/README.md`：项目与运行指引
+- `docs/API_DOCS.md`：HTTP API 说明
+- `docs/TEST_SCRIPTS.md`：测试脚本文档
+- `docs/测试脚本使用说明.md`：测试脚本简版快速上手
 
-Frontend integration is not yet connected. In Phase 1, the companion loop runs
-in headless mode via `backend/main.py`.
+## 快速开始
 
-## Future Integration
-
-When a frontend is added, it will communicate with the backend via:
-
-- **WebSocket / SSE** for real-time expression and character events
-- **HTTP API** for command dispatching (e.g., `express(emotion)`, `speak(text)`)
-- See `blueprints/phase0/architecture/orchestrator-design.md` for the intended
-  communication architecture.
-
-## Directory Structure (planned)
-
+```bash
+pnpm install
+pnpm dev
 ```
-frontend/
-├── public/          # Static assets
-├── src/             # Frontend source (React / PIXI / Cubism4)
-├── api/             # Backend API client
-└── README.md        # This file
-```
+
+开发端口默认为 `http://localhost:7788`，若端口冲突可自行调整并通过 `LIVE2D_API_BASE` 或 `--port` 参数告知测试脚本。
