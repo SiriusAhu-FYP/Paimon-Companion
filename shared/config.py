@@ -25,7 +25,7 @@ class OrchestratorConfig(BaseModel):
 
 class VLMConfig(BaseModel):
 	base_url: str = "http://localhost:8000/v1"
-	model: str = "Qwen/Qwen2.5-VL-72B-Instruct"
+	model: str = "Qwen/Qwen3-VL-2B-Instruct"
 
 
 class LLMConfig(BaseModel):
